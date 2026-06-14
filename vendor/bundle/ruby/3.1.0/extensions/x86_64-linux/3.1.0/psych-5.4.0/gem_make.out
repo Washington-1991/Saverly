@@ -1,0 +1,28 @@
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.1.0/gems/psych-5.4.0/ext/psych
+/home/adduser/.rbenv/versions/3.1.2/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.1.0/gems/psych-5.4.0/ext/psych
+make DESTDIR\= sitearchdir\=./.gem.20260614-21734-44v1az sitelibdir\=./.gem.20260614-21734-44v1az clean
+cd libyaml && make clean
+/bin/sh: 1: cd: can't cd to libyaml
+make: [Makefile:281: clean-so] Error 2 (ignored)
+
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.1.0/gems/psych-5.4.0/ext/psych
+make DESTDIR\= sitearchdir\=./.gem.20260614-21734-44v1az sitelibdir\=./.gem.20260614-21734-44v1az
+compiling psych.c
+compiling psych_emitter.c
+compiling psych_parser.c
+compiling psych_to_ruby.c
+compiling psych_yaml_tree.c
+linking shared-object psych.so
+
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.1.0/gems/psych-5.4.0/ext/psych
+make DESTDIR\= sitearchdir\=./.gem.20260614-21734-44v1az sitelibdir\=./.gem.20260614-21734-44v1az install
+/usr/bin/install -c -m 0755 psych.so ./.gem.20260614-21734-44v1az
+
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.1.0/gems/psych-5.4.0/ext/psych
+make DESTDIR\= sitearchdir\=./.gem.20260614-21734-44v1az sitelibdir\=./.gem.20260614-21734-44v1az clean
+cd libyaml && make clean
+/bin/sh: 1: cd: can't cd to libyaml
+make: [Makefile:281: clean-so] Error 2 (ignored)

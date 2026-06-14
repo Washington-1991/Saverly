@@ -1,0 +1,18 @@
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.1.0/gems/racc-1.8.1/ext/racc/cparse
+/home/adduser/.rbenv/versions/3.1.2/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.1.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20260614-21734-88u7ge sitelibdir\=./.gem.20260614-21734-88u7ge clean
+
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.1.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20260614-21734-88u7ge sitelibdir\=./.gem.20260614-21734-88u7ge
+compiling cparse.c
+linking shared-object racc/cparse.so
+
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.1.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20260614-21734-88u7ge sitelibdir\=./.gem.20260614-21734-88u7ge install
+/usr/bin/install -c -m 0755 cparse.so ./.gem.20260614-21734-88u7ge/racc
+
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.1.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20260614-21734-88u7ge sitelibdir\=./.gem.20260614-21734-88u7ge clean

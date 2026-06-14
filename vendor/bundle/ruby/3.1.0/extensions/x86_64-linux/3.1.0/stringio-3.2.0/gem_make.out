@@ -1,0 +1,19 @@
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.1.0/gems/stringio-3.2.0/ext/stringio
+/home/adduser/.rbenv/versions/3.1.2/bin/ruby extconf.rb
+checking for rb_io_mode_t in ruby/io.h... no
+creating Makefile
+
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.1.0/gems/stringio-3.2.0/ext/stringio
+make DESTDIR\= sitearchdir\=./.gem.20260614-21734-wkmfbr sitelibdir\=./.gem.20260614-21734-wkmfbr clean
+
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.1.0/gems/stringio-3.2.0/ext/stringio
+make DESTDIR\= sitearchdir\=./.gem.20260614-21734-wkmfbr sitelibdir\=./.gem.20260614-21734-wkmfbr
+compiling stringio.c
+linking shared-object stringio.so
+
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.1.0/gems/stringio-3.2.0/ext/stringio
+make DESTDIR\= sitearchdir\=./.gem.20260614-21734-wkmfbr sitelibdir\=./.gem.20260614-21734-wkmfbr install
+/usr/bin/install -c -m 0755 stringio.so ./.gem.20260614-21734-wkmfbr
+
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.1.0/gems/stringio-3.2.0/ext/stringio
+make DESTDIR\= sitearchdir\=./.gem.20260614-21734-wkmfbr sitelibdir\=./.gem.20260614-21734-wkmfbr clean

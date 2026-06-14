@@ -1,0 +1,18 @@
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.1.0/gems/websocket-driver-0.8.1/ext/websocket-driver
+/home/adduser/.rbenv/versions/3.1.2/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.1.0/gems/websocket-driver-0.8.1/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20260614-21734-51nfzp sitelibdir\=./.gem.20260614-21734-51nfzp clean
+
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.1.0/gems/websocket-driver-0.8.1/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20260614-21734-51nfzp sitelibdir\=./.gem.20260614-21734-51nfzp
+compiling websocket_mask.c
+linking shared-object websocket_mask.so
+
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.1.0/gems/websocket-driver-0.8.1/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20260614-21734-51nfzp sitelibdir\=./.gem.20260614-21734-51nfzp install
+/usr/bin/install -c -m 0755 websocket_mask.so ./.gem.20260614-21734-51nfzp
+
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.1.0/gems/websocket-driver-0.8.1/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20260614-21734-51nfzp sitelibdir\=./.gem.20260614-21734-51nfzp clean
