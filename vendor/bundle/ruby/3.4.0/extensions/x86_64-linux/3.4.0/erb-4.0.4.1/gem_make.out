@@ -1,0 +1,18 @@
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.4.0/gems/erb-4.0.4.1/ext/erb/escape
+/home/adduser/.rbenv/versions/3.4.7/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.4.0/gems/erb-4.0.4.1/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20260614-40897-92na1o sitelibdir\=./.gem.20260614-40897-92na1o clean
+
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.4.0/gems/erb-4.0.4.1/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20260614-40897-92na1o sitelibdir\=./.gem.20260614-40897-92na1o
+compiling escape.c
+linking shared-object erb/escape.so
+
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.4.0/gems/erb-4.0.4.1/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20260614-40897-92na1o sitelibdir\=./.gem.20260614-40897-92na1o install
+/usr/bin/install -c -m 0755 escape.so ./.gem.20260614-40897-92na1o/erb
+
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.4.0/gems/erb-4.0.4.1/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20260614-40897-92na1o sitelibdir\=./.gem.20260614-40897-92na1o clean

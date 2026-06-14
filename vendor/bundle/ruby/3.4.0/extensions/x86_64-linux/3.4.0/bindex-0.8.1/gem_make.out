@@ -1,0 +1,18 @@
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.4.0/gems/bindex-0.8.1/ext/skiptrace
+/home/adduser/.rbenv/versions/3.4.7/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.4.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= sitearchdir\=./.gem.20260614-40897-n1tn0t sitelibdir\=./.gem.20260614-40897-n1tn0t clean
+
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.4.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= sitearchdir\=./.gem.20260614-40897-n1tn0t sitelibdir\=./.gem.20260614-40897-n1tn0t
+compiling cruby.c
+linking shared-object skiptrace/internal/cruby.so
+
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.4.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= sitearchdir\=./.gem.20260614-40897-n1tn0t sitelibdir\=./.gem.20260614-40897-n1tn0t install
+/usr/bin/install -c -m 0755 cruby.so ./.gem.20260614-40897-n1tn0t/skiptrace/internal
+
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.4.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= sitearchdir\=./.gem.20260614-40897-n1tn0t sitelibdir\=./.gem.20260614-40897-n1tn0t clean

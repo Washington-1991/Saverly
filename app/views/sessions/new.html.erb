@@ -1,0 +1,23 @@
+<h1>Iniciar sesión</h1>
+
+<%= form_tag login_path, method: :post do %>
+  <% if flash[:alert] %>
+    <div style="color: red">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= label_tag :username %>
+    <%= text_field_tag :username %>
+  </div>
+
+  <div>
+    <%= label_tag :password %>
+    <%= password_field_tag :password %>
+  </div>
+
+  <%= submit_tag "Entrar" %>
+<% end %>
+
+<p>¿No tienes cuenta? <%= link_to "Regístrate", signup_path %></p>
