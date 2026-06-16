@@ -101,7 +101,7 @@ jobs:
         run: bundle exec rake rswag:specs:swaggerize
 
       - name: Upload Swagger docs as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: swagger-docs
@@ -109,7 +109,7 @@ jobs:
           if-no-files-found: ignore
 
       - name: Keep screenshots from failed system tests
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: screenshots
