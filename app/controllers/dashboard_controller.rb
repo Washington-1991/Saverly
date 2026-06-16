@@ -3,6 +3,8 @@ class DashboardController < ApplicationController
 
   def index
     @user = current_user
+    @asset_accounts = current_user.accounts.where(kind: "asset")
+    @balances = @asset_accounts.map { |acc| [ acc.id, acc.balance ] }.to_h
   end
 
   private

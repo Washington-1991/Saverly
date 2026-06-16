@@ -23,5 +23,8 @@ module Saverly
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Habilitar Rack::Attack para rate limiting
+    config.middleware.use Rack::Attack
   end
 end

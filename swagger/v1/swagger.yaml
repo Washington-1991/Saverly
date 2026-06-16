@@ -1,0 +1,503 @@
+---
+openapi: 3.0.1
+info:
+  title: API de Saverly
+  version: v1
+  description: Documentación de la API para la aplicación de contabilidad personal
+    Saverly
+servers:
+- url: http://localhost:3000
+  description: Servidor de desarrollo
+components:
+  schemas:
+    Account:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        kind:
+          type: string
+          enum:
+          - asset
+          - expense
+          - income
+        current_balance:
+          type: number
+          format: float
+    Movement:
+      type: object
+      properties:
+        id:
+          type: integer
+        date:
+          type: string
+          format: date
+        amount:
+          type: number
+          format: float
+        description:
+          type: string
+        source_account_id:
+          type: integer
+        destination_account_id:
+          type: integer
+    BalanceReport:
+      type: object
+      properties:
+        total_balance:
+          type: number
+          format: float
+        accounts:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+              balance:
+                type: number
+                format: float
+    IncomeExpenseReport:
+      type: object
+      properties:
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        total_income:
+          type: number
+          format: float
+        total_expense:
+          type: number
+          format: float
+        net:
+          type: number
+          format: float
+    RecentMovementsReport:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+          date:
+            type: string
+            format: date
+          amount:
+            type: number
+            format: float
+          description:
+            type: string
+          source_account:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+              kind:
+                type: string
+          destination_account:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+              kind:
+                type: string
+    MonthlySummary:
+      type: object
+      properties:
+        year:
+          type: integer
+        month:
+          type: integer
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        total_income:
+          type: number
+          format: float
+        total_expense:
+          type: number
+          format: float
+        net:
+          type: number
+          format: float
+        daily_summary:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+              total:
+                type: number
+                format: float
+              count:
+                type: integer
+  securitySchemes:
+    cookie:
+      type: apiKey
+      in: cookie
+      name: _saverly_session
+security:
+- cookie: []
+paths:
+  "/api/v1/accounts":
+    get:
+      summary: Lista de cuentas del usuario
+      tags:
+      - Cuentas
+      security:
+      - cookie: []
+      responses:
+        '200':
+          description: cuentas obtenidas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Account"
+    post:
+      summary: Crear una cuenta
+      tags:
+      - Cuentas
+      security:
+      - cookie: []
+      parameters: []
+      responses:
+        '201':
+          description: cuenta creada
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Account"
+        '422':
+          description: datos inválidos
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                kind:
+                  type: string
+                  enum:
+                  - asset
+                  - expense
+                  - income
+              required:
+              - name
+              - kind
+  "/api/v1/accounts/{id}":
+    get:
+      summary: Obtener una cuenta
+      tags:
+      - Cuentas
+      security:
+      - cookie: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: cuenta encontrada
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Account"
+        '404':
+          description: cuenta no encontrada
+    put:
+      summary: Actualizar una cuenta
+      tags:
+      - Cuentas
+      security:
+      - cookie: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: cuenta actualizada
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Account"
+        '422':
+          description: datos inválidos
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                kind:
+                  type: string
+                  enum:
+                  - asset
+                  - expense
+                  - income
+    delete:
+      summary: Eliminar una cuenta
+      tags:
+      - Cuentas
+      security:
+      - cookie: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: cuenta eliminada
+        '422':
+          description: no se puede eliminar porque tiene movimientos asociados
+  "/api/v1/movements":
+    get:
+      summary: Lista de movimientos
+      tags:
+      - Movimientos
+      security:
+      - cookie: []
+      responses:
+        '200':
+          description: movimientos obtenidos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Movement"
+    post:
+      summary: Crear un movimiento
+      tags:
+      - Movimientos
+      security:
+      - cookie: []
+      parameters: []
+      responses:
+        '201':
+          description: movimiento creado
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Movement"
+        '422':
+          description: datos inválidos
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date
+                amount:
+                  type: number
+                  format: float
+                description:
+                  type: string
+                source_account_id:
+                  type: integer
+                destination_account_id:
+                  type: integer
+              required:
+              - date
+              - amount
+              - source_account_id
+              - destination_account_id
+  "/api/v1/movements/{id}":
+    get:
+      summary: Obtener un movimiento
+      tags:
+      - Movimientos
+      security:
+      - cookie: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: movimiento encontrado
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Movement"
+    put:
+      summary: Actualizar un movimiento
+      tags:
+      - Movimientos
+      security:
+      - cookie: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: movimiento actualizado
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Movement"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date
+                amount:
+                  type: number
+                  format: float
+                description:
+                  type: string
+                source_account_id:
+                  type: integer
+                destination_account_id:
+                  type: integer
+    delete:
+      summary: Eliminar un movimiento
+      tags:
+      - Movimientos
+      security:
+      - cookie: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: movimiento eliminado
+  "/api/v1/reports/balance":
+    get:
+      summary: Obtener balance general
+      tags:
+      - Reportes
+      security:
+      - cookie: []
+      responses:
+        '200':
+          description: balance obtenido
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/BalanceReport"
+  "/api/v1/reports/income_vs_expense":
+    get:
+      summary: Ingresos vs gastos en un rango de fechas
+      tags:
+      - Reportes
+      security:
+      - cookie: []
+      parameters:
+      - name: start_date
+        in: query
+        format: date
+        required: false
+        schema:
+          type: string
+      - name: end_date
+        in: query
+        format: date
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: reporte obtenido
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/IncomeExpenseReport"
+  "/api/v1/reports/recent_movements":
+    get:
+      summary: Movimientos recientes
+      tags:
+      - Reportes
+      security:
+      - cookie: []
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        description: Número máximo de movimientos (default 10)
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: movimientos obtenidos
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/RecentMovementsReport"
+  "/api/v1/reports/monthly_summary":
+    get:
+      summary: Resumen mensual
+      tags:
+      - Reportes
+      security:
+      - cookie: []
+      parameters:
+      - name: year
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: month
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: resumen obtenido
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/MonthlySummary"
