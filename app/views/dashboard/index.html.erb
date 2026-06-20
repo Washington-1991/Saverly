@@ -1,5 +1,61 @@
-<h1>Dashboard de Saverly</h1>
+<h1>Dashboard de Finanzas</h1>
 
-<p>Hola, <strong><%= current_user.username %></strong>. Esta es tu área privada.</p>
+<div style="display: flex; gap: 20px; margin-bottom: 20px;">
+  <%= link_to 'Gestionar cuentas', accounts_path, class: 'btn' %>
+  <%= link_to 'Nuevo movimiento', new_movement_path, class: 'btn' %>
+  <%= link_to 'Ver movimientos', movements_path, class: 'btn' %>
+</div>
 
-<%= button_to "Cerrar sesión", logout_path, method: :delete %>
+<h2>Mis cuentas</h2>
+<% @accounts = current_user.accounts.internal.order(:name) # Solo internas %>
+<% if @accounts.present? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Cuenta</th>
+        <th>Saldo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @accounts.each do |account| %>
+        <tr>
+          <td><%= account.name %></td>
+          <td><%= number_to_currency(account.current_balance) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No hay cuentas creadas. <%= link_to 'Crea una', new_account_path %>.</p>
+<% end %>
+
+<h2>Últimos movimientos</h2>
+<% if @recent_movements.present? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Descripción</th>
+        <th>Tipo</th>
+        <th>Monto</th>
+        <th>Origen</th>
+        <th>Destino</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @recent_movements.each do |movement| %>
+        <tr>
+          <td><%= movement.date.strftime("%d/%m/%Y") %></td>
+          <td><%= movement.description %></td>
+          <td><%= movement.movement_type.humanize %></td>
+          <td><%= number_to_currency(movement.amount) %></td>
+          <td><%= movement.source_account&.name || '—' %></td>
+          <td><%= movement.destination_account&.name || '—' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to 'Ver todos los movimientos', movements_path %>
+<% else %>
+  <p>No hay movimientos registrados. <%= link_to 'Registra uno', new_movement_path %>.</p>
+<% end %>

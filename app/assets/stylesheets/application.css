@@ -1,14 +1,17 @@
 body {
   font-family: system-ui, -apple-system, sans-serif;
-  max-width: 500px;
+  width: 100vh;
+  height: 90vh;
   margin: 2rem auto;
   padding: 0 1rem;
   line-height: 1.5;
+  background: radial-gradient( circle farthest-corner at 10% 20%,  rgba(151,41,247,1) 0%, rgba(24,22,39,1) 90% );
+  background-repeat: no-repeat;
 }
 
 h1 {
-  color: #1e3a8a;
-  border-bottom: 2px solid #e5e7eb;
+  color: #d5d8e1;
+  border-bottom: 2px solid #10151e;
   padding-bottom: 0.5rem;
 }
 
@@ -16,32 +19,46 @@ div {
   margin-bottom: 1rem;
 }
 
-input, button, .submit {
+/* Solo para campos de texto */
+input {
   padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 1rem;
-}
-
-input {
   width: 100%;
   box-sizing: border-box;
 }
 
-button, input[type="submit"] {
-  background-color: #1e3a8a;
+/* Estilo degradado para botones, submits y elementos con clase .submit */
+button,
+input[type="submit"],
+.submit {
+  background-image: linear-gradient(to right, #DA22FF 0%, #9733EE 51%, #DA22FF 100%);
+  margin: 10px;
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
   color: white;
+  box-shadow: 0 0 8px #eee;
+  border-radius: 10px;
+  display: inline-block;  /* Cambia a block si quieres que ocupen todo el ancho */
+  outline: none;
   border: none;
   cursor: pointer;
-  transition: background-color 0.2s;
 }
 
-button:hover, input[type="submit"]:hover {
-  background-color: #1e40af;
+button:hover,
+input[type="submit"]:hover,
+.submit:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none;
 }
 
 a {
-  color: #1e3a8a;
+  color: #d5d8e1;
   text-decoration: none;
 }
 
@@ -64,8 +81,6 @@ a:hover {
   border-radius: 4px;
   margin-bottom: 1rem;
 }
-
-
 
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files

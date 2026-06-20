@@ -1,0 +1,34 @@
+<h1>Listado de movimientos</h1>
+
+<%= link_to 'Nuevo movimiento', new_movement_path, class: 'btn' %>
+
+<% if @movements.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Descripción</th>
+        <th>Tipo</th>
+        <th>Monto</th>
+        <th>Origen</th>
+        <th>Destino</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @movements.each do |movement| %>
+        <tr>
+          <td><%= movement.date.strftime("%d/%m/%Y") %></td>
+          <td><%= movement.description %></td>
+          <td><%= movement.movement_type.humanize %></td>
+          <td><%= number_to_currency(movement.amount) %></td>
+          <td><%= movement.source_account&.name || '—' %></td>
+          <td><%= movement.destination_account&.name || '—' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No hay movimientos registrados. <%= link_to 'Registra uno', new_movement_path %>.</p>
+<% end %>
+
+<%= link_to 'Volver al dashboard', dashboard_index_path %>

@@ -1,0 +1,35 @@
+<% if @user.errors.any? %>
+  <div style="color: red">
+    <h4>Se encontraron <%= pluralize(@user.errors.count, "error") %>:</h4>
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div>
+  <%= f.label :email %>
+  <%= f.email_field :email, required: true %>
+</div>
+
+<div>
+  <%= f.label :username, "Nombre de usuario" %>
+  <%= f.text_field :username, required: true %>
+</div>
+
+<div>
+  <%= f.label :password, "Contraseña" %>
+  <%= f.password_field :password, placeholder: "Dejar en blanco si no desea cambiarla" %>
+</div>
+
+<div>
+  <%= f.label :password_confirmation, "Confirmar contraseña" %>
+  <%= f.password_field :password_confirmation, placeholder: "Dejar en blanco si no desea cambiarla" %>
+</div>
+
+<div>
+  <%= f.label :role, "Rol" %>
+  <%= f.select :role, [['Usuario', 'user'], ['Administrador', 'admin']], {}, required: true %>
+</div>

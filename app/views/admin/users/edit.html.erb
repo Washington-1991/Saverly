@@ -1,0 +1,9 @@
+<h1>Editar Usuario: <%= @user.username %></h1>
+
+<%= form_with model: [:admin, @user], local: true do |f| %>
+  <%= render "form", f: f %>
+
+  <%= f.submit "Guardar Cambios" %>
+<% end %>
+
+<%= link_to "Volver", admin_users_path %>

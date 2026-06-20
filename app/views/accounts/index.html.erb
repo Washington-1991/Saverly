@@ -1,0 +1,33 @@
+<h1>Mis cuentas</h1>
+
+<%= link_to 'Nueva cuenta', new_account_path, class: 'btn' %>
+
+<% if @accounts.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Tipo</th>
+        <th>Saldo</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @accounts.each do |account| %>
+        <tr>
+          <td><%= account.name %></td>
+          <%# <td><%= account.kind.humanize %></td>
+          <td><%= number_to_currency(account.current_balance) %></td>
+          <td>
+            <%= link_to 'Editar', edit_account_path(account) %>
+            <%= link_to 'Eliminar', account_path(account), method: :delete, data: { confirm: '¿Estás seguro de eliminar esta cuenta?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No tienes cuentas creadas. <%= link_to 'Crea una ahora', new_account_path %>.</p>
+<% end %>
+
+<%= link_to 'Volver al dashboard', dashboard_index_path %>

@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
-  mount Rswag::Ui::Engine => '/api-docs'
-  mount Rswag::Api::Engine => '/api-docs'
+  mount Rswag::Ui::Engine => "/api-docs"
+  mount Rswag::Api::Engine => "/api-docs"
+
   # Rutas de autenticación
-  get "signup", to: "users#new"
-  post "signup", to: "users#create"
   get "login", to: "sessions#new"
   post "login", to: "sessions#create"
   delete "logout", to: "sessions#destroy"
@@ -12,12 +11,21 @@ Rails.application.routes.draw do
   root "dashboard#index"
   get "dashboard/index"
 
-  # Rutas existentes que no debes perder
-  get "users/new"
-  get "users/create"
-  get "sessions/new"
-  get "sessions/create"
-  get "sessions/destroy"
+  # ════════════════════════════════════════════════
+  # Rutas para la interfaz web de cuentas y movimientos
+  # ════════════════════════════════════════════════
+  resources :accounts, except: [ :show ] do
+    # Opcional: si quieres listar movimientos de una cuenta, podrías añadir:
+    # member { get :movements }
+  end
+
+  # Solo las rutas que necesitamos ahora
+  resources :movements, only: [ :index, :new, :create ]
+
+  # Panel de administración (solo admin)
+  namespace :admin do
+    resources :users, except: [ :show ]
+  end
 
   # Health check y PWA
   get "up" => "rails/health#show", as: :rails_health_check

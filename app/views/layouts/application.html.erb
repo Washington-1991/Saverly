@@ -18,6 +18,25 @@
   </head>
 
   <body>
+    <nav style="padding: 0.5rem 1rem; background: #f8f8f8; border-bottom: 1px solid #ccc; margin-bottom: 1rem;">
+      <% if logged_in? %>
+        <%= link_to "Dashboard", root_path %> |
+        <% if admin? %>
+          <%= link_to "Panel de Admin", admin_users_path %> |
+        <% end %>
+        <%= link_to "Cerrar sesión", logout_path, data: { turbo_method: :delete } %>
+      <% else %>
+        <%= link_to "Iniciar sesión", login_path %>
+      <% end %>
+    </nav>
+
+    <% if flash[:notice] %>
+      <p style="color: green"><%= flash[:notice] %></p>
+    <% end %>
+    <% if flash[:alert] %>
+      <p style="color: red"><%= flash[:alert] %></p>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

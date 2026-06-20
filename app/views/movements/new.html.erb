@@ -1,0 +1,102 @@
+<h1>Nuevo movimiento</h1>
+
+<%= form_with(model: @movement, local: true) do |form| %>
+  <% if @movement.errors.any? %>
+    <div style="color: red; border: 1px solid red; padding: 10px; margin-bottom: 10px;">
+      <h2><%= pluralize(@movement.errors.count, "error") %> impiden guardar:</h2>
+      <ul>
+        <% @movement.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :movement_type, "Tipo de movimiento" %>
+    <%= form.select :movement_type, 
+          options_for_select([['Transferencia', 'transfer'], ['Ingreso', 'income'], ['Gasto', 'expense']], @movement.movement_type),
+          { prompt: "Selecciona tipo" },
+          { required: true, id: "movement_type_select" } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description, "Descripción" %>
+    <%= form.text_field :description, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :amount, "Monto" %>
+    <%= form.number_field :amount, step: 0.01, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date, "Fecha" %>
+    <%= form.date_field :date, value: Date.today, required: true %>
+  </div>
+
+  <div id="source_account_field" class="field">
+    <%= form.label :source_account_id, "Cuenta origen" %>
+    <%= form.collection_select :source_account_id, @accounts, :id, :name, 
+          { include_blank: "Selecciona cuenta" },
+          { id: "source_account_select" } %>
+  </div>
+
+  <div id="destination_account_field" class="field">
+    <%= form.label :destination_account_id, "Cuenta destino" %>
+    <%= form.collection_select :destination_account_id, @accounts, :id, :name, 
+          { include_blank: "Selecciona cuenta" },
+          { id: "destination_account_select" } %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Registrar movimiento" %>
+  </div>
+<% end %>
+
+<%= link_to 'Volver al listado', movements_path %>
+
+<script>
+  // Usamos turbo:load para asegurar que se ejecute después de cada navegación Turbo
+  document.addEventListener('turbo:load', function() {
+    const typeSelect = document.getElementById('movement_type_select');
+    const sourceField = document.getElementById('source_account_field');
+    const destField = document.getElementById('destination_account_field');
+
+    // Si no se encuentran los elementos, salimos
+    if (!typeSelect || !sourceField || !destField) {
+      console.error('No se encontraron los elementos necesarios');
+      return;
+    }
+
+    function updateFields() {
+      const type = typeSelect.value;
+      console.log('Tipo seleccionado:', type); // Para depurar
+
+      // Ocultar ambos por defecto
+      sourceField.style.display = 'none';
+      destField.style.display = 'none';
+
+      if (type === 'transfer') {
+        sourceField.style.display = 'block';
+        destField.style.display = 'block';
+        sourceField.querySelector('label').textContent = 'Cuenta origen';
+        destField.querySelector('label').textContent = 'Cuenta destino';
+      } else if (type === 'income') {
+        destField.style.display = 'block';
+        destField.querySelector('label').textContent = 'Cuenta destino (ingreso)';
+      } else if (type === 'expense') {
+        sourceField.style.display = 'block';
+        sourceField.querySelector('label').textContent = 'Cuenta origen (gasto)';
+      } else {
+        // Si no hay tipo seleccionado, mostrar ambos (opcional)
+        sourceField.style.display = 'block';
+        destField.style.display = 'block';
+      }
+    }
+
+    // Ejecutar al cargar y al cambiar
+    typeSelect.addEventListener('change', updateFields);
+    updateFields();
+  });
+</script>

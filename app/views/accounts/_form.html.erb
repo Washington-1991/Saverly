@@ -1,0 +1,27 @@
+<%= form_with(model: @account, local: true) do |form| %>
+  <% if @account.errors.any? %>
+    <div style="color: red; border: 1px solid red; padding: 10px; margin-bottom: 10px;">
+      <h2><%= pluralize(@account.errors.count, "error") %> impiden guardar esta cuenta:</h2>
+      <ul>
+        <% @account.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name, "Nombre" %>
+    <%= form.text_field :name, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :current_balance, "Saldo inicial" %>
+    <%= form.number_field :current_balance, step: 0.01, value: number_with_precision(@account.current_balance, precision: 2) %>
+    <small>(Se actualizará automáticamente con los movimientos)</small>
+  </div>
+
+  <div class="actions">
+    <%= form.submit @account.new_record? ? "Crear cuenta" : "Actualizar cuenta" %>
+  </div>
+<% end %>

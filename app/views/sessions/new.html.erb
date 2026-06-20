@@ -8,8 +8,8 @@
   <% end %>
 
   <div>
-    <%= label_tag :username %>
-    <%= text_field_tag :username %>
+    <%= label_tag :login, "Email o nombre de usuario" %>
+    <%= text_field_tag :login, params[:login] %>
   </div>
 
   <div>
@@ -19,5 +19,3 @@
 
   <%= submit_tag "Entrar" %>
 <% end %>
-
-<p>¿No tienes cuenta? <%= link_to "Regístrate", signup_path %></p>
