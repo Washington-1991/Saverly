@@ -97,3 +97,58 @@ a:hover {
  *= require_tree .
  *= require_self
  */
+
+/* ===== NUEVO ESTILO PARA FORMULARIO CON BORDE ANIMADO ===== */
+.form {
+  --width-of-input: 200px;
+  --border-height: 1px;
+  --border-before-color: rgba(221, 221, 221, 0.39);
+  --border-after-color: #5891ff;
+  --input-hovered-color: #4985e01f;
+  position: relative;
+  width: var(--width-of-input);
+}
+
+/* Estilo específico para inputs dentro de .form */
+.form .input {
+  color: #fff;
+  font-size: 0.9rem;
+  background-color: transparent;
+  width: 100%;
+  box-sizing: border-box;
+  padding-inline: 0.5em;
+  padding-block: 0.7em;
+  border: none;
+  border-bottom: var(--border-height) solid var(--border-before-color);
+}
+
+/* Borde animado */
+.input-border {
+  position: absolute;
+  background: var(--border-after-color);
+  width: 0%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  transition: 0.3s;
+}
+
+/* Hover solo para el input con clase .input */
+.form .input:hover {
+  background: var(--input-hovered-color);
+}
+
+.form .input:focus {
+  outline: none;
+}
+
+/* Animación del borde al enfocar */
+.form .input:focus ~ .input-border {
+  width: 100%;
+}
+
+/* (Opcional) Si prefieres animación al escribir, descomenta:
+.form .input:valid ~ .input-border {
+  width: 100%;
+}
+*/
