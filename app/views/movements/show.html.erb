@@ -1,0 +1,39 @@
+<div class="container mt-4">
+  <h1>Detalle del Movimiento</h1>
+
+  <div class="card mt-3">
+    <div class="card-body">
+      <dl class="row">
+        <dt class="col-sm-3">Fecha</dt>
+        <dd class="col-sm-9"><%= @movement.date %></dd>
+
+        <dt class="col-sm-3">Descripción</dt>
+        <dd class="col-sm-9"><%= @movement.description %></dd>
+
+        <dt class="col-sm-3">Tipo</dt>
+        <dd class="col-sm-9"><%= @movement.movement_type.humanize %></dd>
+
+        <dt class="col-sm-3">Monto</dt>
+        <dd class="col-sm-9"><%= number_to_currency(@movement.amount) %></dd>
+
+        <% if @movement.source_account.present? %>
+          <dt class="col-sm-3">Cuenta Origen</dt>
+          <dd class="col-sm-9"><%= @movement.source_account.name %></dd>
+        <% end %>
+
+        <% if @movement.destination_account.present? %>
+          <dt class="col-sm-3">Cuenta Destino</dt>
+          <dd class="col-sm-9"><%= @movement.destination_account.name %></dd>
+        <% end %>
+      </dl>
+    </div>
+  </div>
+
+  <div class="mt-3">
+    <%= link_to 'Editar', edit_movement_path(@movement), class: 'btn btn-primary' %>
+    <%= link_to 'Eliminar', @movement, 
+                data: { turbo_method: :delete, turbo_confirm: '¿Estás seguro de eliminar este movimiento?' }, 
+                class: 'btn btn-danger' %>
+    <%= link_to 'Volver al listado', movements_path, class: 'btn btn-secondary' %>
+  </div>
+</div>
