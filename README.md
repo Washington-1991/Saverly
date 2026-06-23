@@ -1,24 +1,65 @@
-# README
+# Saverly – Gestión de finanzas personales con partida doble
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Aplicación web desarrollada con **Ruby on Rails 7.2+** y **PostgreSQL** para la gestión de finanzas personales utilizando el principio de **partida doble** (origen → destino). Permite llevar control de cuentas, movimientos (ingresos, gastos, transferencias), generar reportes y administrar usuarios con roles.
 
-Things you may want to cover:
+---
 
-* Ruby version
+## 🚀 Estado actual del proyecto
 
-* System dependencies
+**✅ Funcionalidades completas:**
+- Autenticación de usuarios (login con email/username, registro desactivado).
+- Roles: **admin** y **user** con panel de administración de usuarios.
+- CRUD completo de **cuentas** (nombre y saldo).
+- CRUD completo de **movimientos** con lógica de partida doble:
+  - Tipos: `transfer`, `income`, `expense`.
+  - Validaciones contables (saldo suficiente, origen ≠ destino, propiedad).
+  - Actualización automática de saldos con transacciones y bloqueos pesimistas.
+- Dashboard con resumen de cuentas y últimos movimientos.
+- API REST JSON para cuentas, movimientos y reportes.
+- Reportes: balance general, ingresos vs gastos, movimientos recientes, resumen mensual.
+- Caching de reportes con invalidación automática.
+- Rate limiting (rack-attack) para prevenir abusos.
+- Logging de auditoría de cambios en cuentas y movimientos.
+- Documentación de API con **Swagger/OpenAPI** (disponible en `/api-docs`).
+- Pruebas automatizadas con **RSpec**, integración continua con **GitHub Actions**.
+- Seeds con usuarios iniciales (admin y usuarios de prueba).
 
-* Configuration
+**⏳ Pendiente (mejoras futuras):**
+- Mejorar el diseño visual (Bootstrap/Tailwind).
+- Gráficos interactivos (Chartkick).
+- Preparación para móviles (responsive o PWA).
+- Despliegue en Fly.io (o similar).
+- Exportación de datos (CSV, PDF).
 
-* Database creation
+---
 
-* Database initialization
+## 📦 Tecnologías utilizadas
 
-* How to run the test suite
+- **Ruby 3.1+**
+- **Ruby on Rails 7.2.2**
+- **PostgreSQL** (base de datos)
+- **bcrypt** (autenticación)
+- **pagy** (paginación)
+- **rack-attack** (rate limiting)
+- **rswag** (Swagger/OpenAPI)
+- **RSpec**, **FactoryBot**, **Faker** (pruebas)
+- **RuboCop**, **Brakeman** (análisis estático)
+- **GitHub Actions** (CI/CD)
 
-* Services (job queues, cache servers, search engines, etc.)
+---
 
-* Deployment instructions
+## 📋 Requisitos previos
 
-* ...
+- Ruby 3.1+
+- PostgreSQL 12+
+- Node.js (para assets)
+- Bundler
+
+---
+
+## 🛠️ Configuración e instalación
+
+### 1. Clonar el repositorio
+```bash
+git clone https://github.com/Washington-1991/Saverly.git
+cd Saverly

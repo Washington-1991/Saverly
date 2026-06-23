@@ -19,11 +19,10 @@ Rails.application.routes.draw do
     # member { get :movements }
   end
 
-  # Solo las rutas que necesitamos ahora
-  resources :movements, only: [ :index, :new, :create ]
-
-  # Panel de administración (solo admin)
-  namespace :admin do
+    # Solo las rutas que necesitamos ahora
+    resources :movements
+    # Panel de administración (solo admin)
+    namespace :admin do
     resources :users, except: [ :show ]
   end
 
