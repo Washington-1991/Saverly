@@ -14,6 +14,10 @@ Aplicación web desarrollada con **Ruby on Rails 7.2+** y **PostgreSQL** para la
   - Tipos: `transfer`, `income`, `expense`.
   - Validaciones contables (saldo suficiente, origen ≠ destino, propiedad).
   - Actualización automática de saldos con transacciones y bloqueos pesimistas.
+  - **Vista de detalle (`show`)** para cada movimiento.
+  - **Listado con filtros** por tipo de movimiento y rango de fechas.
+  - **Orden descendente** por fecha y hora de creación.
+  - **Confirmación al eliminar** con Turbo (evita borrados accidentales).
 - Dashboard con resumen de cuentas y últimos movimientos.
 - API REST JSON para cuentas, movimientos y reportes.
 - Reportes: balance general, ingresos vs gastos, movimientos recientes, resumen mensual.
