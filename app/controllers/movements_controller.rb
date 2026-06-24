@@ -1,12 +1,27 @@
 class MovementsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_movement, only: [ :edit, :update, :destroy, :show ]   # <-- incluido :show
+  before_action :set_movement, only: [ :edit, :update, :destroy, :show ]
 
-  ddef index
-  @movements = current_user.movements
-                           .includes(:source_account, :destination_account)
-                           .order(date: :desc, created_at: :desc)
-end
+  def index
+    movements = current_user.movements.includes(:source_account, :destination_account)
+
+    # Filtros por tipo
+    if params[:movement_type].present?
+      movements = movements.where(movement_type: params[:movement_type])
+    end
+
+    # Filtro por fecha desde
+    if params[:date_from].present?
+      movements = movements.where("date >= ?", params[:date_from])
+    end
+
+    # Filtro por fecha hasta
+    if params[:date_to].present?
+      movements = movements.where("date <= ?", params[:date_to])
+    end
+
+    @movements = movements.order(date: :desc, created_at: :desc)
+  end
 
   def show
     # @movement ya está cargado por set_movement
