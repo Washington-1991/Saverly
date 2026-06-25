@@ -6,9 +6,11 @@ class Account < ApplicationRecord
   validates :name, presence: true, uniqueness: { scope: :user_id, case_sensitive: false }
   validates :current_balance, numericality: true
 
-  # Scopes para filtrar cuentas externas
+  # Scopes para filtrar cuentas externas / internas
   scope :external, -> { where(external: true) }
   scope :internal, -> { where(external: false) }
+
+  # ─── Métodos de instancia ───
 
   def adjust_balance!(amount)
     with_lock do
@@ -25,7 +27,14 @@ class Account < ApplicationRecord
     update!(current_balance: new_balance)
   end
 
+  # Método de predicado para saber si la cuenta es externa
   def external?
     external == true
+  end
+
+  # Método de predicado para saber si la cuenta es interna (no externa)
+  # Esto es necesario para la validación de saldo suficiente en Movement
+  def internal?
+    !external?
   end
 end
