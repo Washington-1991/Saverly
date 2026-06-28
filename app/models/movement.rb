@@ -8,9 +8,11 @@ class Movement < ApplicationRecord
   validates :date, presence: true
   validates :amount, presence: true, numericality: { greater_than: 0 }
   validates :movement_type, presence: true, inclusion: { in: MOVEMENT_TYPES }
+
+  # Validaciones específicas según el tipo de movimiento
+  validate :required_accounts_by_type
   validate :different_accounts, if: -> { source_account_id && destination_account_id }
   validate :user_owns_accounts
-  validate :at_least_one_account
   validate :sufficient_balance, if: -> { source_account && source_account.internal? }
 
   after_create :update_balances_on_create
@@ -19,12 +21,41 @@ class Movement < ApplicationRecord
 
   private
 
+  # --- Validación de cuentas requeridas según el tipo ---
+  def required_accounts_by_type
+    case movement_type
+    when "income"
+      if destination_account_id.blank?
+        errors.add(:destination_account, "debe estar presente para un ingreso")
+      end
+      if source_account_id.present?
+        errors.add(:source_account, "no debe estar presente para un ingreso (el dinero viene de fuera)")
+      end
+    when "expense"
+      if source_account_id.blank?
+        errors.add(:source_account, "debe estar presente para un gasto")
+      end
+      if destination_account_id.present?
+        errors.add(:destination_account, "no debe estar presente para un gasto (el dinero sale hacia fuera)")
+      end
+    when "transfer"
+      if source_account_id.blank?
+        errors.add(:source_account, "debe estar presente para una transferencia")
+      end
+      if destination_account_id.blank?
+        errors.add(:destination_account, "debe estar presente para una transferencia")
+      end
+    end
+  end
+
+  # --- Validación de que origen y destino no sean la misma ---
   def different_accounts
     if source_account_id == destination_account_id
       errors.add(:base, "La cuenta origen y destino no pueden ser la misma")
     end
   end
 
+  # --- Validación de pertenencia al usuario ---
   def user_owns_accounts
     if source_account && source_account.user_id != user.id
       errors.add(:source_account, "no pertenece al usuario")
@@ -34,15 +65,21 @@ class Movement < ApplicationRecord
     end
   end
 
-  def at_least_one_account
-    if source_account_id.nil? && destination_account_id.nil?
-      errors.add(:base, "Debe seleccionar al menos una cuenta")
-    end
-  end
-
+  # --- Validación de saldo suficiente (con soporte para edición) ---
   def sufficient_balance
-    if source_account && source_account.current_balance < amount
-      errors.add(:base, "Saldo insuficiente en la cuenta origen (#{source_account.name})")
+    return unless source_account && source_account.internal?
+
+    # Para actualizaciones, el saldo actual de la cuenta YA incluye este movimiento.
+    # Por tanto, calculamos el saldo antes del movimiento para hacer la comprobación.
+    if persisted?
+      # amount_was es el valor anterior del importe (si cambió, o el mismo si no)
+      balance_before = source_account.current_balance + (amount_was || 0)
+    else
+      balance_before = source_account.current_balance
+    end
+
+    if balance_before < amount
+      errors.add(:base, "Saldo insuficiente en la cuenta origen (#{source_account.name}). Disponible: #{balance_before}")
     end
   end
 

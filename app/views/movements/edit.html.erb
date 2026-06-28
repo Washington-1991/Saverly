@@ -1,0 +1,52 @@
+<h1>Editar movimiento</h1>
+
+<% if @movement.errors.any? %>
+  <div id="error_explanation" style="color: red; border: 1px solid red; padding: 10px; margin-bottom: 20px;">
+    <h2><%= pluralize(@movement.errors.count, "error") %> impidieron guardar el movimiento:</h2>
+    <ul>
+      <% @movement.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<% accounts = current_user.accounts.order(:name) %>
+
+<%= form_with model: @movement, local: true do |f| %>
+  <div>
+    <%= f.label :movement_type, "Tipo" %>
+    <%= f.select :movement_type, Movement::MOVEMENT_TYPES.map { |t| [t.humanize, t] }, {} %>
+  </div>
+
+  <div>
+    <%= f.label :description, "Descripción" %>
+    <%= f.text_field :description %>
+  </div>
+
+  <div>
+    <%= f.label :amount, "Importe" %>
+    <%= f.number_field :amount, step: 0.01 %>
+  </div>
+
+  <div>
+    <%= f.label :date, "Fecha" %>
+    <%= f.date_field :date %>
+  </div>
+
+  <div id="account-fields">
+    <div>
+      <%= f.label :source_account_id, "Cuenta origen" %>
+      <%= f.select :source_account_id, accounts.map { |a| [a.name, a.id] }, include_blank: true %>
+    </div>
+    <div>
+      <%= f.label :destination_account_id, "Cuenta destino" %>
+      <%= f.select :destination_account_id, accounts.map { |a| [a.name, a.id] }, include_blank: true %>
+    </div>
+  </div>
+
+  <%= f.submit "Actualizar movimiento" %>
+<% end %>
+
+<%= link_to "Volver", movement_path(@movement) %> |
+<%= link_to "Lista de movimientos", movements_path %>
