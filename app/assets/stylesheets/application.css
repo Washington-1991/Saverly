@@ -4,6 +4,12 @@
 /* laptop max-width: 1024px */
 /* desktop min-width: 1025px */
 
+/* Dashboard general */
+  @import "dashboard/_shared.scss";
+  @import "dashboard/_desktop.scss";
+  @import "dashboard/_laptop.scss";
+  @import "dashboard/_tablet.scss";
+  @import "dashboard/_mobile.scss";
 
 
 body {
