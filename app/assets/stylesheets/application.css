@@ -11,6 +11,13 @@
   @import "dashboard/_tablet.scss";
   @import "dashboard/_mobile.scss";
 
+  /* navbar general */
+  @import "navbar/_shared.scss";
+  @import "navbar/_desktop.scss";
+  @import "navbar/_laptoop.scss";
+  @import "navbar/_tablet.scss";
+  @import "navbar/_mobile.scss";
+
 
 body {
   font-family: system-ui, -apple-system, sans-serif;
@@ -57,7 +64,7 @@ input[type="submit"],
   color: white;
   box-shadow: 0 0 8px #eee;
   border-radius: 10px;
-  display: inline-block;  /* Cambia a block si quieres que ocupen todo el ancho */
+  display: inline-block;  
   outline: none;
   border: none;
   cursor: pointer;
