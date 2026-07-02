@@ -1,0 +1,6 @@
+current directory: /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.1.0/gems/sass-embedded-1.101.0/ext/sass
+/home/adduser/.rbenv/versions/3.1.2/bin/ruby -rrubygems /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.1.0/gems/rake-13.4.2/exe/rake RUBYARCHDIR\=/home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.1.0/extensions/x86_64-linux/3.1.0/sass-embedded-1.101.0 RUBYLIBDIR\=/home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.1.0/extensions/x86_64-linux/3.1.0/sass-embedded-1.101.0
+gem install --force --install-dir /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.1.0/gems/sass-embedded-1.101.0/ext/sass/ruby --no-document --ignore-dependencies --platform x86_64-linux-gnu --version 1.101.0 sass-embedded
+mkdir -p /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.1.0/extensions/x86_64-linux/3.1.0/sass-embedded-1.101.0/sass
+mv /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.1.0/gems/sass-embedded-1.101.0/ext/sass/ruby/gems/sass-embedded-1.101.0-x86_64-linux-gnu/lib/sass/dart-sass /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.1.0/extensions/x86_64-linux/3.1.0/sass-embedded-1.101.0/sass/dart-sass
+rm -rf /home/adduser/code/Washington-1991/Saverly/vendor/bundle/ruby/3.1.0/gems/sass-embedded-1.101.0/ext/sass/ruby

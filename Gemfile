@@ -74,3 +74,5 @@ group :test do
   # Generación de especificaciones OpenAPI para pruebas
   gem "rswag-specs"
 end
+
+gem "dartsass-rails", "~> 0.5.1"
