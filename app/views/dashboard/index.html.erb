@@ -1,29 +1,16 @@
-<%# Dashboard index %>
 
 <div class="dashboard_desktop">
-
+  <%= render "navbar/desktop" %>
 </div>
 <div class="dashboard_laptop">  
-
+  <%= render "navbar/laptop" %>
 </div>
 <div class="dashboard_tablet">  
-
+  <%= render "navbar/tablet" %>
 </div>
 <div class="dashboard_mobile">  
-  
+  <%= render "navbar/mobile" %>
 </div>
-
-<nav style="padding: 0.5rem 1rem; background: transparent; border-bottom: 1px solid #ccc; margin-bottom: 1rem;">
-      <% if logged_in? %>
-        <%= link_to "Dashboard", root_path %> |
-        <% if admin? %>
-          <%= link_to "Panel de Admin", admin_users_path %> |
-        <% end %>
-        <%= link_to "Cerrar sesión", logout_path, data: { turbo_method: :delete } %>
-      <% else %>
-        <%= link_to "Iniciar sesión", login_path %>
-      <% end %>
-    </nav>
 
 
 <h1>Dashboard de Finanzas</h1>
