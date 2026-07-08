@@ -5,7 +5,9 @@
 /* desktop min-width: 1025px */
 
 @import 'variables';
-@import 'navbar/index';
+@import 'navbar/base';
+@import 'navbar'; 
+
 
 /* ===== ESTILOS GLOBALES ===== */
 body {
