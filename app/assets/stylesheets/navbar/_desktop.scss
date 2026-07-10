@@ -13,6 +13,7 @@
   font-family: sans-serif;
   flex-wrap: wrap; // para que en móvil pueda envolver
   gap: 1rem;
+  border: 1px solid white;
 
   // Cada lado es un flex container
   .nav-left,

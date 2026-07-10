@@ -75,4 +75,9 @@ group :test do
   gem "rswag-specs"
 end
 
+# Compilador de SCSS moderno (Dart Sass)
 gem "dartsass-rails", "~> 0.5.1"
+
+# Compilador de SCSS alternativo (necesario para evitar el error 'cannot load such file -- sassc')
+# Añadido para asegurar que Sprockets tenga un compilador disponible
+gem "sassc-rails"

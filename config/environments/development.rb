@@ -64,6 +64,16 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
+  # ================================================================
+  # 🔧 MODIFICACIONES PARA RESOLVER EL ERROR DE ASSETS
+  # ================================================================
+  # Compilar assets en tiempo real en desarrollo (evita el error de precompilación)
+  config.assets.compile = true
+
+  # Asegurar que application.css (compilado desde application.scss) esté en la lista de precompilación
+  config.assets.precompile += %w[ application.css ]
+  # ================================================================
+
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 
