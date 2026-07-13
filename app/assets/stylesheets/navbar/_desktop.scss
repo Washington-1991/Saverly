@@ -3,7 +3,8 @@
 // ============================================
 
 
-.navbar-desktop {
+@media screen and (min-width: 1025px) {
+  .navbar-desktop {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -62,4 +63,6 @@
   .nav-right a + a {
     margin-left: 0.5rem;
   }
+}
+
 }
