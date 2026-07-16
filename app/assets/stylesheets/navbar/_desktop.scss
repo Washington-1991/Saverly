@@ -2,9 +2,7 @@
 // ESTILOS BASE DE LA NAVBAR (comunes a todos)
 // ============================================
 
-
-@media screen and (min-width: 1025px) {
-  .navbar-desktop {
+.navbar-desktop {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -12,11 +10,11 @@
   background-color: transparent;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   font-family: sans-serif;
-  flex-wrap: wrap; // para que en móvil pueda envolver
+  flex-wrap: wrap;
   gap: 1rem;
   border: 1px solid white;
 
-  // Cada lado es un flex container
+  // Lado izquierdo y derecho
   .nav-left,
   .nav-right {
     display: flex;
@@ -25,31 +23,69 @@
     flex-wrap: wrap;
   }
 
-  // El span "Dashboard" (o título)
+  // Logo
+  .logo-img {
+    height: 10vh;
+    width: auto;
+    display: block;
+  }
+
+  // Texto "Dashboard"
   .nav-left span {
     font-weight: 600;
     color: #333;
     font-size: 1.1rem;
   }
 
-  // Los botones (link_to con clase 'btn')
+  // ============================================
+  // ESTILO PARA LOS BOTONES (clase .btn)
+  // ============================================
   .btn {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    background-color: #f0f0f0;
-    color: #333;
+    min-width: 104px;
+    height: 40px;
+    border-radius: 40px;
+    background: #000;
+    padding: 12px 28px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1;
+    transition: background .2s ease-in-out, color .2s ease-in-out;
+    position: relative;
     text-decoration: none;
-    border-radius: 4px;
-    font-weight: 500;
-    transition: background 0.2s;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+
+    &::before {
+      content: '';
+      width: 100%;
+      height: 100%;
+      border-radius: 40px;
+      background: linear-gradient(69deg, #c3aab2 -4.77%, #9ec 46.72%, #80c0c8 90.23%, #4B8bfa 134.46%);
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      z-index: -1;
+      transition: opacity .2s ease-in-out;
+    }
 
     &:hover {
-      background-color: #e0e0e0;
+      background: transparent;
+      color: #000;
+
+      &::before {
+        opacity: 1;
+      }
     }
   }
 
-  // Enlaces de la derecha (login/logout)
-  .nav-right a {
+  // Enlaces de la derecha (Dashboard, Admin, etc.) excepto el botón .Btn
+  .nav-right a:not(.Btn) {
     color: #555;
     text-decoration: none;
     font-weight: 500;
@@ -59,10 +95,83 @@
     }
   }
 
-  // Separador "|" entre enlaces (no es necesario si usas gap, pero lo dejamos)
-  .nav-right a + a {
+  .nav-right a + a:not(.Btn) {
     margin-left: 0.5rem;
   }
-}
 
+  // ============================================
+  // BOTÓN DE CERRAR SESIÓN (estilo personalizado)
+  // ============================================
+  .Btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition-duration: 0.3s;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+    background-color: white;
+    text-decoration: none;
+
+    .sign {
+      width: 100%;
+      transition-duration: 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      svg {
+        width: 17px;
+
+        path {
+          fill: black;
+        }
+      }
+    }
+
+    .text {
+      position: absolute;
+      right: 0%;
+      width: 0%;
+      opacity: 0;
+      color: white;
+      font-size: 1.2em;
+      font-weight: 600;
+      transition-duration: 0.3s;
+      white-space: nowrap;
+    }
+
+    &:hover {
+      background-color: black;
+      width: 125px;
+      border-radius: 40px;
+      transition-duration: 0.3s;
+
+      .sign {
+        width: 30%;
+        transition-duration: 0.3s;
+        padding-left: 20px;
+
+        svg path {
+          fill: white;
+        }
+      }
+
+      .text {
+        opacity: 1;
+        width: 70%;
+        transition-duration: 0.3s;
+        padding-right: 10px;
+      }
+    }
+
+    &:active {
+      transform: translate(2px, 2px);
+    }
+  }
 }
