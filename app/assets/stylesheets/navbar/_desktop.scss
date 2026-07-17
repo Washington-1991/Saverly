@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: space-between;
   height: 8vh;
-  padding: 1rem 2rem;
+  padding: 8px;
   background-color: transparent;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   font-family: sans-serif;
@@ -22,14 +22,20 @@
     gap: 3rem;
     flex-wrap: wrap;
 
-    logo {
-      border: 1px solid red; // (puedes quitarlo si quieres)
+    .logo-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid red; // (puedes quitarlo si quieres)
     }
 
-    div {
+    .nav-left-buttons {
       display: flex;
       align-items: center;
+      justify-content: center;
+      height: 8vh;
       gap: 3rem;
+      border: 1px solid white;
     }
   }
 
@@ -73,9 +79,7 @@
     font-family: inherit;
     font-size: 1rem;
     font-weight: 400;
-    overflow: hidden; // necesario para ocultar el background que se expande
-
-    // El gradiente se aplica como fondo, pero con tamaño 0 inicialmente
+    overflow: hidden;    
     background-image: linear-gradient(
       82.3deg,
       rgba(150, 93, 233, 1) 10.8%,
@@ -86,18 +90,16 @@
     background-size: 0% 100%; // comienza con ancho 0
     transition: background-size 0.475s ease;
 
-    // El color de fondo base se mantiene como fallback
-    // pero al hacer hover, el gradiente se expande desde la izquierda
+   
     &:hover {
       background-size: 100% 100%; // se expande a todo el ancho
-      // El texto se mantiene visible porque el gradiente está en el fondo
-      // y el color del texto es blanco (contrasta)
+      
     }
 
-    // Opcional: si quieres que el texto cambie de color en hover, añade:
-    // &:hover {
-    //   color: #fff; // o cualquier otro
-    // }
+    
+     &:hover {
+       color: #fff; // o cualquier otro
+     }
   }
 
   // Enlaces de la derecha (Dashboard, Admin, etc.) excepto el botón .Btn
